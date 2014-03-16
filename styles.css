@@ -1,0 +1,52 @@
+<style>
+
+body{
+	background-color: none;
+}
+
+#wrapper{
+	background-color:rgb(240,247,255);
+	height: auto;
+}
+
+#titleHolder{
+	background: white;
+	margin-bottom: 30px;
+	padding-bottom: 8px;
+}
+
+#title{
+
+	
+	font-size: 16px;
+}
+
+.controls{
+	width: 300px;
+}
+
+#userList{
+	margin: 0 0 20px 30px;
+}
+
+span.square {
+    float: none;
+    margin-right: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size :24px;
+}
+
+.square {
+    background: none repeat scroll 0 0 #00A4D1;
+    border-radius: 3px 3px 3px 3px;
+    color: white;
+    float: left;
+    margin-right: 5px;
+    text-align: center;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3) !important;
+    width: 16px;
+}
+
+
+</style>
