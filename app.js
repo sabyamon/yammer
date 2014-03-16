@@ -3,6 +3,17 @@ var util = require("util");
 
 server.listen(3000);
 
+/**
+ * Need to include MongoDb and store the User Info in it.
+ * Store the User Info in DB if the email does not exist and set the isActive flag as true.
+ * Else assume that the user is already registered . Hence set the isActive flag as true and put him in the active users list.
+ *
+ */
+
+/**
+ * Populate the Users list with data fetched from DB. Not directly from the client.
+ */
+
 app.get('/', function(req, res) {
 	res.sendfile(__dirname + '/index.html');
 });
@@ -24,7 +35,7 @@ io.sockets.on('connection', function(socket) {
 			users[socket.nickname] = socket;
 
 			// console.log('Server has got a pool of : ' + util.inspect(users, {
-				// depth : null
+			// depth : null
 			// }));
 
 			console.log("pool of users ::" + Object.keys(users));
@@ -40,24 +51,30 @@ io.sockets.on('connection', function(socket) {
 	socket.on('send message', function(data, callback) {
 		var msg = data.trim();
 		console.log('after trimming message is: ' + msg);
-		if(msg.substr(0,3) === '/w '){
-		msg = msg.substr(3);
-		var ind = msg.indexOf(' ');
-		if(ind !== -1){
-		var name = msg.substring(0, ind);
-		var msg = msg.substring(ind + 1);
-		if(name in users){
-		users[name].emit('whisper', {msg: msg, nick: socket.nickname});
-		console.log('message sent is: ' + msg);
-		console.log('Whisper!');
-		} else{
-		callback('Error!  Enter a valid user.');
-		}
-		} else{
-		callback('Error!  Please enter a message for your whisper.');
-		}
-		} else{
-		io.sockets.emit('new message', {msg: msg, nick: socket.nickname});
+		if (msg.substr(0, 3) === '/w ') {
+			msg = msg.substr(3);
+			var ind = msg.indexOf(' ');
+			if (ind !== -1) {
+				var name = msg.substring(0, ind);
+				var msg = msg.substring(ind + 1);
+				if ( name in users) {
+					users[name].emit('whisper', {
+						msg : msg,
+						nick : socket.nickname
+					});
+					console.log('message sent is: ' + msg);
+					console.log('Whisper!');
+				} else {
+					callback('Error!  Enter a valid user.');
+				}
+			} else {
+				callback('Error!  Please enter a message for your whisper.');
+			}
+		} else {
+			io.sockets.emit('new message', {
+				msg : msg,
+				nick : socket.nickname
+			});
 		}
 
 		io.sockets.emit('new message', {
@@ -72,4 +89,4 @@ io.sockets.on('connection', function(socket) {
 		delete users[socket.nickname];
 		updateNicknames();
 	});
-}); 
+});

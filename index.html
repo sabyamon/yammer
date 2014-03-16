@@ -1,375 +1,389 @@
 <html>
-<head>
-	<title>Fadfish Chatterbox</title>
-	<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
-	<style>
-		#chat{
-			height:500px;
-		}
-		#contentWrap{
-			display: block;
-			width: 100%;
-		}
+	<head>
+		<title>Fadfish Yammer !</title>
+		<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
 
-		#chatPage{
-			display:none;
-			width: 100%;
-		}
-		#chatWrap{
-			float: left;
-			border: 1px #000 solid;
-		}
-		.error{
-			color: red;
-		}
-		.whisper{
-			color: gray;
-			font-style: italic;
-		}
+		<style>
+			#chat {
+				height: 500px;
+			}
+			#contentWrap {
+				display: block;
+				width: 100%;
+			}
 
-		.sendMessage{
-			width:100%;
-			float:left;
-		}
+			#chatPage {
+				display: none;
+				width: 100%;
+			}
+			#chatWrap {
+				float: left;
+				border: 1px #000 solid;
+			}
+			.error {
+				color: red;
+			}
+			.whisper {
+				color: gray;
+				font-style: italic;
+			}
 
-		body{
-			background-color: none;
-		}
+			.sendMessage {
+				width: 100%;
+				float: left;
+			}
 
-		#wrapper{
-			background-color:rgb(240,247,255);
-			height: auto;
-		}
+			body {
+				background-color: none;
+			}
 
-		#titleHolder{
-			background: white;
-			margin-bottom: 30px;
-			padding-bottom: 8px;
-		}
+			#wrapper {
+				background-color: rgb(240,247,255);
+				height: auto;
+			}
 
-		#title{
+			#titleHolder {
+				background: white;
+				margin-bottom: 30px;
+				padding-bottom: 8px;
+			}
 
-			
-			font-size: 16px;
-		}
+			#title {
 
-		.controls{
-			width: 300px;
-		}
+				font-size: 16px;
+			}
 
-		#userList{
-			margin: 0 0 20px 30px;
-		}
+			.controls {
+				width: 300px;
+			}
 
-		span.square {
-		    float: none;
-		    margin-right: 0;
-		    padding-left: 5px;
-		    padding-right: 5px;
-		    font-size :24px;
-		}
+			#userList {
+				margin: 0 0 20px 30px;
+			}
 
-		.square {
-		    background: none repeat scroll 0 0 #00A4D1;
-		    border-radius: 3px 3px 3px 3px;
-		    color: white;
-		    float: left;
-		    margin-right: 5px;
-		    text-align: center;
-		    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3) !important;
-		    width: 16px;
-		}
+			span.square {
+				float: none;
+				margin-right: 0;
+				padding-left: 5px;
+				padding-right: 5px;
+				font-size: 24px;
+			}
 
+			.square {
+				background: none repeat scroll 0 0 #00A4D1;
+				border-radius: 3px 3px 3px 3px;
+				color: white;
+				float: left;
+				margin-right: 5px;
+				text-align: center;
+				text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3) !important;
+				width: 16px;
+			}
 
-		#tabs{ 
-		    padding:0; 
-		    margin:0; 
-		    font-family:Arial, Helvetica, sans-serif; 
-		    font-size:12px; 
-		    color:#FFF; 
-		    font-weight:bold; 
-		} 
-		#tabs ul{ 
-		    list-style:none; 
-		    margin:0; 
-		    padding:0; 
-		} 
-		#tabs ul li{ 
-		    display:inline; 
-		    margin:0; 
-		    text-transform:capitalize; 
-		} 
-		#tabs ul li a{ 
-		    padding:5px 16px; 
-		    color:#FFF; 
-		    background:#E7A272; 
-		    float:left; 
-		    text-decoration:none; 
-		    border:1px solid #D17B40; 
-		    border-left:0; 
-		    margin:0; 
-		    text-transform:capitalize; 
-		} 
-		#tabs ul li a:hover{ 
-		    background:#EAEAEA; 
-		    color:#7F9298; 
-		    text-decoration:none; 
-		    border-bottom:1px solid #EAEAEA; 
-		} 
-		#tabs ul li a.active{ 
-		    background:#EAEAEA; 
-		    color:#7F9298; 
-		    border-bottom:1px solid #EAEAEA; 
-		} 
-		#content{    
-		    background:#EAEAEA; 
-		    clear:both; 
-		    font-size:11px; 
-		    color:#000; 
-		    padding:10px; 
-		    font-family:Arial, Helvetica, sans-serif; 
-		}
+			#tabs {
+				padding: 0;
+				margin: 0;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 12px;
+				color: #FFF;
+				font-weight: bold;
+			}
+			#tabs ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			#tabs ul li {
+				display: inline;
+				margin: 0;
+				text-transform: capitalize;
+			}
+			#tabs ul li a {
+				padding: 5px 16px;
+				color: #FFF;
+				background: #E7A272;
+				float: left;
+				text-decoration: none;
+				border: 1px solid #D17B40;
+				border-left: 0;
+				margin: 0;
+				text-transform: capitalize;
+			}
+			#tabs ul li a:hover {
+				background: #EAEAEA;
+				color: #7F9298;
+				text-decoration: none;
+				border-bottom: 1px solid #EAEAEA;
+			}
+			#tabs ul li a.active {
+				background: #EAEAEA;
+				color: #7F9298;
+				border-bottom: 1px solid #EAEAEA;
+			}
+			#content {
+				background: #EAEAEA;
+				clear: both;
+				font-size: 11px;
+				color: #000;
+				padding: 10px;
+				font-family: Arial, Helvetica, sans-serif;
+			}
 
-	</style>
-</head>
-<body>
-<div id="wrapper">
-		<div id="titleHolder"><span class="square">Welcome to <em>Fadfish Chatterbox !</em></span>
-		</div>
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="titleHolder">
+				<span class="square">Welcome to <em>Yammer !</em></span>
+			</div>
 
-		<div id='tabs'> 
-			<ul> 
-				<li><a href='#'>Home</a></li> 
-				<li id="addTab"><a href='#'>+</a></li> 
-			</ul> 
-		</div> 
-		<div id='content'>Your main content goes here!
-			<div id="nickWrap">
-				<p>Enter a username:</p>
-				<p id="nickError"></p>
-				<form id="setNick">
+			<div id='tabs'>
+				<ul>
+					<li>
+						<a href='#'>Home</a>
+					</li>
+					<li id="addTab">
+						<a href='#'>+</a>
+					</li>
+				</ul>
+			</div>
+			<div id='content'>
+				<div id="nickWrap">
+					<!--
+					No Need of the nick name input text box. Will be driving the User Data from his/her FB profile !
+
+					<p>Enter a username:</p>
+					<p id="nickError"></p>
+					<form id="setNick">
 					<input size="35" id="nickname"></input>
 					<input type="submit" value="Submit"></input>
-				</form>
-				
-				<div>
-	              <div id="signin-button" class="show" style="float:left">
-		              <div class="g-signin" data-callback="loginFinishedCallback"
-		                  data-approvalprompt="force"
-		                  data-clientid="526697610145.apps.googleusercontent.com"
-		                  data-scope="https://www.googleapis.com/auth/userinfo.email"
-		                  data-height="short"
-		                  data-cookiepolicy="single_host_origin"
-		                  >
-		              </div>
-	              <!-- In most cases, you don't want to use approvalprompt=force. Specified
-	              here to facilitate the demo.-->
-	              </div>
-	              <br/>
-	              <br/>
-              <!-- Add where you want your sign-in button to render -->
-              <!-- Facebook Button -->
-              	  <fb:login-button show-faces="true" width="400" max-rows="1" scope="email,user_about_me,user_birthday,user_hometown,user_interests,user_likes,user_location,user_photos"></fb:login-button>
-              <!-- Facebook Button Ends -->
+					</form> -->
 
-           		</div>  
-          </div>
+					<div>
+						<div id="signin-button" class="show" style="float:left">
+							<div class="g-signin" data-callback="loginFinishedCallback"
+							data-approvalprompt="force"
+							data-clientid="526697610145.apps.googleusercontent.com"
+							data-scope="https://www.googleapis.com/auth/userinfo.email"
+							data-height="short"
+							data-cookiepolicy="single_host_origin"
+							></div>
+							<!-- In most cases, you don't want to use approvalprompt=force. Specified
+							here to facilitate the demo.-->
+						</div>
+						<br/>
+						<br/>
+						<!-- Add where you want your sign-in button to render -->
+						<!-- Facebook Button -->
+						<fb:login-button show-faces="true" width="400" max-rows="1" scope="email,user_about_me,user_birthday,user_hometown,user_interests,user_likes,user_location,user_photos"></fb:login-button>
+						<!-- Facebook Button Ends -->
+
+					</div>
+				</div>
 			</div>
-			
-			
-			
+
 			<div id="chatPage">
 				<div id="contentWrap">
 					<div id="chatWrap" style="width: 70%; height: 300px; margin: 0 0 20px 0; border: solid 1px #999; overflow-y: scroll;word-wrap:break-word;background-color:white;float:left">
-						<div id="chat">
-						</div>
+						<div id="chat"></div>
 					</div>
-					<div id="users" style="width: 20%; height: 300px; border: solid 1px #999; overflow-y: scroll;word-wrap:break-word;background-color:white;float:left;margin-left:20px">
-					</div>
-					
+					<div id="users" style="width: 20%; height: 300px; border: solid 1px #999; overflow-y: scroll;word-wrap:break-word;background-color:white;float:left;margin-left:20px"></div>
+
 				</div>
 				<div class="sendMessage">
 					<form id="send-message">
-							<input size="35" id="message"></input>
-							<input type="submit" value="Send"></input>
+						<input size="35" id="message">
+						</input>
+						<input type="submit" value="Send">
+						</input>
 					</form>
 				</div>
 				<div class="disconnect">
 					<form id="disconnect">
-						<input type="submit" value="Disconnect" />						
+						<input type="submit" value="Disconnect" />
 					</form>
 				</div>
 			</div>
-			
+
 		</div>
-	</div>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
-	<script>
-	
-	$.get("http://ipinfo.io", function(response) {
-    	//alert(response.ip);
-	}, "jsonp");
-		// var myIP = myip ;
-		// alert(myip);
-	</script>
-	<script src="/socket.io/socket.io.js"></script>
-	<script>
-		jQuery(function($){
-			var socket = io.connect();
-			var $nickForm = $('#setNick');
-			var $nickError = $('#nickError');
-			var $nickBox = $('#nickname');
-			var $users = $('#users');
-			var $messageForm = $('#send-message');
-			var $messageBox = $('#message');
-			var $chat = $('#chat');
-			
-			$nickForm.submit(function(e){
-				e.preventDefault();
-				socket.emit('new user', $nickBox.val(), '10.209.62.183' , function(data){
-					if(data){
-						$('#nickWrap').hide();
-						$('#chatPage').show();
-					} else{
-						$nickError.html('That username is already taken!  Try again.');
+		</div>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
+		<script>
+			$.get("http://ipinfo.io", function(response) {
+				//alert(response.ip);
+			}, "jsonp");
+			// var myIP = myip ;
+			// alert(myip);
+		</script>
+		<script src="/socket.io/socket.io.js"></script>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+		<!-- Facebook Login Code -->
+
+		<script>
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId : '628587837152963', // App ID
+					channelUrl : 'channel.html', // Channel File
+					status : true, // check login status
+					cookie : true, // enable cookies to allow the server to access the session
+					xfbml : true // parse XFBML
+				});
+
+				// Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
+				// for any authentication related change, such as login, logout or session refresh. This means that
+				// whenever someone who was previously logged out tries to log in again, the correct case below
+				// will be handled.
+				FB.Event.subscribe('auth.authResponseChange', function(response) {
+					// Here we specify what we do with the response anytime this event occurs.
+					if (response.status === 'connected') {
+						// The response object is returned with a status field that lets the app know the current
+						// login status of the person. In this case, we're handling the situation where they
+						// have logged in to the app.
+						testAPI();
+					} else if (response.status === 'not_authorized') {
+						// In this case, the person is logged into Facebook, but not into the app, so we call
+						// FB.login() to prompt them to do so.
+						// In real-life usage, you wouldn't want to immediately prompt someone to login
+						// like this, for two reasons:
+						// (1) JavaScript created popup windows are blocked by most browsers unless they
+						// result from direct interaction from people using the app (such as a mouse click)
+						// (2) it is a bad experience to be continually prompted to login upon page load.
+						FB.login();
+					} else {
+						// In this case, the person is not logged into Facebook, so we call the login()
+						// function to prompt them to do so. Note that at this stage there is no indication
+						// of whether they are logged into the app. If they aren't then they'll see the Login
+						// dialog right after they log in to Facebook.
+						// The same caveats as above apply to the FB.login() call here.
+						FB.login();
 					}
 				});
-				$nickBox.val('');
-			});
-			
-			
-			function loginWithFB(emailid){
-				
-				socket.emit('new user', emailid, '10.209.62.183' , function(data){
-					if(data){
-						$('#nickWrap').hide();
-						$('#chatPage').show();
-					} else{
-						$nickError.html('That username is already taken!  Try again.');
+			};
+
+			// Load the SDK asynchronously
+			( function(d) {
+					var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+					if (d.getElementById(id)) {
+						return;
 					}
+					js = d.createElement('script');
+					js.id = id;
+					js.async = true;
+					js.src = "//connect.facebook.net/en_US/all.js";
+					ref.parentNode.insertBefore(js, ref);
+				}(document));
+
+			// Here we run a very simple test of the Graph API after login is successful.
+			// This testAPI() function is only called in those cases.
+			function testAPI() {
+				console.log('Welcome!  Fetching your information.... ');
+				FB.api('/me', function(response) {
+					callProcessorFB(response);
+
 				});
-				//$nickBox.val('');
-				
 			}
-			
-			
-			socket.on('usernames', function(data){
 
-				var html = '<ul>';
-				for(i=0; i < data.length; i++){
-					html += '<li id="user_' + data[i] + '">' ;
-					html += data[i] + '</li>' + '<br/>'
-				}
-				html += "</ul>" ;
-				$users.html(html);
-			});
-			
-			$messageForm.submit(function(e){
-				e.preventDefault();
-				socket.emit('send message', $messageBox.val(), function(data){
-					$chat.append('<span class="error">' + data + "</span><br/>");
+			function callProcessorFB(resp) {
+
+				/**
+				 * Printing the FB account info to see what FB is shitting out ! Will filter in future .
+				 */
+				console.log('Facebook response is :: ' + resp);
+				console.log('Retrieved facebook Email for:' + resp.email);
+				console.log('Retrieved facebook Display Name for:' + resp.name);
+				console.log('Retrieved facebook Gender for:' + resp.gender);
+				console.log('Retrieved facebook birthday for:' + resp.birthday);
+
+				//email,user_about_me,user_birthday,user_hometown,user_interests,user_likes,user_location,user_photos
+				console.log('Retrieved facebook link for:' + resp.link);
+				console.log('Retrieved facebook likes for:' + resp.likes);
+				console.log('Retrieved facebook user location for:' + resp.location);
+				console.log('Retrieved facebook user photos for:' + resp.photos);
+
+				console.log('Now login with FB');
+				loginWithFB(resp.email);
+
+			}
+
+		</script>
+
+		<script>
+			jQuery(function($) {
+				var socket = io.connect();
+				var $nickForm = $('#setNick');
+				var $nickError = $('#nickError');
+				var $nickBox = $('#nickname');
+				var $users = $('#users');
+				var $messageForm = $('#send-message');
+				var $messageBox = $('#message');
+				var $chat = $('#chat');
+
+				$nickForm.submit(function(e) {
+					e.preventDefault();
+					socket.emit('new user', $nickBox.val(), '10.209.62.183', function(data) {
+						if (data) {
+							$('#nickWrap').hide();
+							$('#chatPage').show();
+						} else {
+							$nickError.html('That username is already taken!  Try again.');
+						}
+					});
+					$nickBox.val('');
 				});
-				$messageBox.val('');
+
+				socket.on('usernames', function(data) {
+
+					var html = '<ul>';
+					for ( i = 0; i < data.length; i++) {
+						html += '<li id="user_' + data[i] + '">';
+						html += data[i] + '</li>' + '<br/>'
+					}
+					html += "</ul>";
+					$users.html(html);
+				});
+
+				$messageForm.submit(function(e) {
+					e.preventDefault();
+					socket.emit('send message', $messageBox.val(), function(data) {
+						$chat.append('<span class="error">' + data + "</span><br/>");
+					});
+					$messageBox.val('');
+				});
+
+				socket.on('new message', function(data) {
+					$chat.append('<span class="msg"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
+				});
+
+				socket.on('whisper', function(data) {
+					$chat.append('<span class="whisper"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
+				});
+
+				$("li").click(function() {
+					alert('user clicked')
+				});
+
 			});
-			
-			socket.on('new message', function(data){
-				$chat.append('<span class="msg"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
-			});
-			
-			socket.on('whisper', function(data){
-				$chat.append('<span class="whisper"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
-			});
 
-			$("li").click(function(){
-				alert('user clicked')
-			}) ;
+			/**
+			 * Main function to get the FB profile info and let the user login to the chat page.
+			 */
+			function loginWithFB(emailid) {
+				var socket = io.connect();
+				console.log('In side Login with FB');
+				socket.emit('new user', emailid, '10.209.62.183', function(data) {
+					if (data) {
+						$('#nickWrap').hide();
+						$('#chatPage').show();
+					} else {
+						$nickError.html('That username is already taken!  Try again.');
+					}
+				});
 
+			}
+		</script>
 
-		});
-	</script>
-	
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-  
-<!-- Facebook Login Code -->
-
-<script>
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '628587837152963', // App ID
-    channelUrl : 'channel.html', // Channel File
-    status     : true, // check login status
-    cookie     : true, // enable cookies to allow the server to access the session
-    xfbml      : true  // parse XFBML
-  });
-
-  // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
-  // for any authentication related change, such as login, logout or session refresh. This means that
-  // whenever someone who was previously logged out tries to log in again, the correct case below 
-  // will be handled. 
-  FB.Event.subscribe('auth.authResponseChange', function(response) {
-    // Here we specify what we do with the response anytime this event occurs. 
-    if (response.status === 'connected') {
-      // The response object is returned with a status field that lets the app know the current
-      // login status of the person. In this case, we're handling the situation where they 
-      // have logged in to the app.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // In this case, the person is logged into Facebook, but not into the app, so we call
-      // FB.login() to prompt them to do so. 
-      // In real-life usage, you wouldn't want to immediately prompt someone to login 
-      // like this, for two reasons:
-      // (1) JavaScript created popup windows are blocked by most browsers unless they 
-      // result from direct interaction from people using the app (such as a mouse click)
-      // (2) it is a bad experience to be continually prompted to login upon page load.
-      FB.login();
-    } else {
-      // In this case, the person is not logged into Facebook, so we call the login() 
-      // function to prompt them to do so. Note that at this stage there is no indication
-      // of whether they are logged into the app. If they aren't then they'll see the Login
-      // dialog right after they log in to Facebook. 
-      // The same caveats as above apply to the FB.login() call here.
-      FB.login();
-    }
-  });
-  };
-
-  // Load the SDK asynchronously
-  (function(d){
-   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-   if (d.getElementById(id)) {return;}
-   js = d.createElement('script'); js.id = id; js.async = true;
-   js.src = "//connect.facebook.net/en_US/all.js";
-   ref.parentNode.insertBefore(js, ref);
-  }(document));
-
-  // Here we run a very simple test of the Graph API after login is successful. 
-  // This testAPI() function is only called in those cases. 
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-    callProcessorFB(response);
-
-    });
-  }
-  function callProcessorFB(resp){
-
-      console.log('Facebook response is :: '+resp);
-      console.log('Retrieved facebook Email for:' + resp.email);
-      console.log('Retrieved facebook Display Name for:' + resp.name);
-      console.log('Retrieved facebook Gender for:' + resp.gender);
-      console.log('Retrieved facebook birthday for:' + resp.birthday);
-
-      //email,user_about_me,user_birthday,user_hometown,user_interests,user_likes,user_location,user_photos
-      console.log('Retrieved facebook link for:' + resp.link);
-      console.log('Retrieved facebook likes for:' + resp.likes);
-      console.log('Retrieved facebook user location for:' + resp.location);
-      console.log('Retrieved facebook user photos for:' + resp.photos);
-      
-      loginWithFB(resp.email);
-
-  }
-
-</script>
-</body>
+	</body>
 </html>
