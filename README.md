@@ -3,4 +3,4 @@ Yammer !
 
 Chat Application Using Node.js , Socket.io, Express , MongoDB .
 
-Sanu Adding
+Is under development ...
