@@ -323,7 +323,7 @@
 
 				$nickForm.submit(function(e) {
 					e.preventDefault();
-					socket.emit('new user', $nickBox.val(), '10.209.62.183', function(data) {
+					socket.emit('new user', $nickBox.val(), function(data) {
 						if (data) {
 							$('#nickWrap').hide();
 							$('#chatPage').show();
@@ -373,7 +373,7 @@
 			function loginWithFB(emailid) {
 				var socket = io.connect();
 				console.log('In side Login with FB');
-				socket.emit('new user', emailid, '10.209.62.183', function(data) {
+				socket.emit('new user', emailid, function(data) {
 					if (data) {
 						$('#nickWrap').hide();
 						$('#chatPage').show();
