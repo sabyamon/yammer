@@ -1,6 +1,13 @@
-var express = require('express'), app = express(), server = require('http').createServer(app), io = require('socket.io').listen(server), users = {};
-var util = require("util");
-
+var express = require('express'),
+    util = require('util'),
+	app = express(),
+	server = require('http').createServer(app),
+	io = require('socket.io').listen(server),
+    usersPool = [],
+    runningUsersPool = [],
+    runningUsersPoolLen = "",
+    CHAT_LIMIT = 2; // Don't change this count. Right now we are implementing for peer to peer users.
+	 
 server.listen(3000);
 
 /**
@@ -18,33 +25,78 @@ app.get('/', function(req, res) {
 	res.sendfile(__dirname + '/index.html');
 });
 
-app.get('/grpChat', function(req, res) {
-	res.sendfile(__dirname + '/index.html');
-});
-
-io.sockets.on('connection', function(socket) {
-	socket.on('new user', function(data, ip, callback) {
-		console.log('insdie new user function' + ip);
-		if ( data in users) {
-			console.log('User who is trying to join is already joined ! Hence tell him/her to change their names');
+io.sockets.on('connection', function(socket){
+    
+	socket.on('new user', function(data, callback){
+		if (data in usersPool){
 			callback(false);
 		} else {
 			callback(true);
-			console.log('User named ' + data);
-			socket.nickname = data;
-			users[socket.nickname] = socket;
+            console.log('User named ' + data);
+            // Need to review the logic here depends on facebbok Account integration
+            socket.nickname = data;
+            usersPool.push({
+                "username": data,
+                "socket_ref": socket,
+                "connectedTo": ""
+            });
 
-			// console.log('Server has got a pool of : ' + util.inspect(users, {
-			// depth : null
-			// }));
-
-			console.log("pool of users ::" + Object.keys(users));
-			updateNicknames();
+            // Check for length of userpool depends on count matching of users procees will start
+            excuteMatchingLogic();
 		}
 	});
+	
+    /**
+     * Check for length of userpool depends on count matching of users procees will start
+     * pushing the combination of user as array into runningPool Array
+    */
+    function excuteMatchingLogic(){
+        
+        if(usersPool.length >= CHAT_LIMIT){
+            var user1 = usersPool.shift();
+            var user2 = usersPool.shift();
+            
+            user1["connectedTo"] = user2.username;
+            user2["connectedTo"] = user1.username;
+                        
+            runningUsersPool.push([ user1,   user2 ]);
+            
+            runningUsersPoolLen = runningUsersPool.length;
+            
+            updateNicknames();
+        }
+    }
 
-	function updateNicknames() {
-		io.sockets.emit('usernames', Object.keys(users));
+    /**
+     * Remove people from runningpool and add back to Userpool
+    */
+    function addBackToUsersPool(arrayIndex){
+        var i, j, chattingGroup, tmpChatObj;
+        chattingGroup  = runningUsersPool.splice(arrayIndex, 1)[0];
+
+        for(i = 0; j = chattingGroup.length, i < j; i++){
+            tmpChatObj = chattingGroup[i];
+            tmpChatObj["connectedTo"] = "";
+
+            usersPool.push(tmpChatObj);
+        }
+
+        runningUsersPoolLen = runningUsersPool.length;
+        updateNicknames();
+    }
+
+    /*
+    * Update the chat users list in the front end
+    */
+	function updateNicknames(){
+        var userNamesList = [], i, k;
+        for(i = 0; i < runningUsersPoolLen; i++){
+            for(k = 0; k < CHAT_LIMIT; k++){
+                userNamesList.push(runningUsersPool[i][k].username);
+            }
+        }
+        
+		io.sockets.emit('usernames', userNamesList);
 	}
 
 
@@ -82,11 +134,18 @@ io.sockets.on('connection', function(socket) {
 			nick : socket.nickname
 		});
 	});
-
-	socket.on('disconnect', function(data) {
-		if (!socket.nickname)
-			return;
-		delete users[socket.nickname];
-		updateNicknames();
+	
+	socket.on('disconnect', function(data){
+        var i, k, socketNickname = socket.nickname || false;
+		if(!socketNickname) return;
+        for(i = 0; i < runningUsersPoolLen; i++){
+            for(k = 0; k < CHAT_LIMIT; k++){
+                if(runningUsersPool[i][k].username == socketNickname){
+                    addBackToUsersPool(i);
+                    break;
+                }
+            }
+        }
+    
 	});
 });

@@ -3,7 +3,7 @@ var url = require('url');
 
 var databaseUrl = "test";
 // "username:password@example.com/mydb"
-var collections = ["photo_info", "user_info"]
+var collections = ["photo_info", "user_info"];
 var db = require("mongojs").connect(databaseUrl, collections);
 
 // Removing a row in MongoDB ::
