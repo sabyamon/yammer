@@ -17,7 +17,18 @@ server.listen(3000);
 app.get('/', function(req, res) {
 	res.sendfile(__dirname + '/index.html');
 });
-
+app.get('/public/css/styles.css', function(req, res) {
+	res.sendfile(__dirname + '/public/css/styles.css');
+});
+app.get('/public/css/yammer.css', function(req, res) {
+	res.sendfile(__dirname + '/public/css/yammer.css');
+});
+app.get('/public/js/Angular.js', function(req, res) {
+	res.sendfile(__dirname + '/public/js/Angular.js');
+});
+app.get('/public/css/bootstrap.css', function(req, res) {
+	res.sendfile(__dirname + '/public/css/bootstrap.css');
+});
 io.sockets.on('connection', function(socket) {
 
 	socket.on('new user', function(data, callback) {

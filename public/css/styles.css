@@ -1,52 +1,167 @@
-<style>
-
-body{
-	background-color: none;
-}
-
-#wrapper{
-	background-color:rgb(240,247,255);
+#wrapper {
+	background-color: rgb(240,247,255);
 	height: auto;
 }
 
-#titleHolder{
+#titleHolder {
 	background: white;
 	margin-bottom: 30px;
 	padding-bottom: 8px;
 }
 
-#title{
+#title {
 
-	
 	font-size: 16px;
 }
 
-.controls{
+.controls {
 	width: 300px;
 }
 
-#userList{
+#userList {
 	margin: 0 0 20px 30px;
 }
 
 span.square {
-    float: none;
-    margin-right: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    font-size :24px;
+	float: none;
+	margin-right: 0;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 24px;
 }
 
 .square {
-    background: none repeat scroll 0 0 #00A4D1;
-    border-radius: 3px 3px 3px 3px;
-    color: white;
-    float: left;
-    margin-right: 5px;
-    text-align: center;
-    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3) !important;
-    width: 16px;
+	background: none repeat scroll 0 0 #00A4D1;
+	border-radius: 3px 3px 3px 3px;
+	color: white;
+	float: left;
+	margin-right: 5px;
+	text-align: center;
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3) !important;
+	width: 16px;
 }
 
+#chat {
+	height: 500px;
+}
+#contentWrap {
+	display: block;
+	width: 100%;
+}
 
-</style>
+#chatPage {
+	display: none;
+	width: 100%;
+}
+#chatWrap {
+	float: left;
+	border: 1px #000 solid;
+}
+.error {
+	color: red;
+}
+.whisper {
+	color: gray;
+	font-style: italic;
+}
+
+.sendMessage {
+	width: 100%;
+	float: left;
+}
+
+body {
+	background-color: none;
+}
+
+#wrapper {
+	background-color: rgb(240,247,255);
+	height: auto;
+}
+
+#titleHolder {
+	background: white;
+	margin-bottom: 30px;
+	padding-bottom: 8px;
+}
+
+#title {
+
+	font-size: 16px;
+}
+
+.controls {
+	width: 300px;
+}
+
+#userList {
+	margin: 0 0 20px 30px;
+}
+
+span.square {
+	float: none;
+	margin-right: 0;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 24px;
+}
+
+.square {
+	background: none repeat scroll 0 0 #00A4D1;
+	border-radius: 3px 3px 3px 3px;
+	color: white;
+	float: left;
+	margin-right: 5px;
+	text-align: center;
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3) !important;
+	width: 16px;
+}
+
+#tabs {
+	padding: 0;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFF;
+	font-weight: bold;
+}
+#tabs ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#tabs ul li {
+	display: inline;
+	margin: 0;
+	text-transform: capitalize;
+}
+#tabs ul li a {
+	padding: 5px 16px;
+	color: #FFF;
+	background: #E7A272;
+	float: left;
+	text-decoration: none;
+	border: 1px solid #D17B40;
+	border-left: 0;
+	margin: 0;
+	text-transform: capitalize;
+}
+#tabs ul li a:hover {
+	background: #EAEAEA;
+	color: #7F9298;
+	text-decoration: none;
+	border-bottom: 1px solid #EAEAEA;
+}
+#tabs ul li a.active {
+	background: #EAEAEA;
+	color: #7F9298;
+	border-bottom: 1px solid #EAEAEA;
+}
+#content {
+	background: #EAEAEA;
+	clear: both;
+	font-size: 11px;
+	color: #000;
+	padding: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+}

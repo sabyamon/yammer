@@ -1,0 +1,12 @@
+/**
+ * 	@author santosh/Sabya
+ */
+body {
+	margin: 0;
+	padding: 0;	
+}
+
+.chatBanner{
+	background: #1FBBA6;
+	height: 50px;
+}
